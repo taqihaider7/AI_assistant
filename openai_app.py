@@ -5,7 +5,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain import OpenAI, VectorDBQA
 from langchain.document_loaders import DirectoryLoader
 
-openai_key = st.secrets["openai_Api_key"]
+openai_key = st.secrets["openai_Api"]
 
 # Set up Streamlit app
 st.set_page_config(
