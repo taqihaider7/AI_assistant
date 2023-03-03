@@ -1,9 +1,10 @@
 import streamlit as st
 from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import Chroma , DeepLake
 from langchain.text_splitter import CharacterTextSplitter
 from langchain import OpenAI, VectorDBQA
 from langchain.document_loaders import DirectoryLoader
+
 
 # Set up OpenAI API key
 import os
@@ -46,7 +47,7 @@ texts = text_splitter.split_documents(documents)
 # Set up question-answering model
 st.write("Setting up question-answering model...")
 embeddings = OpenAIEmbeddings(openai_api_key="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")
-docsearch = Chroma.from_documents(texts, embeddings)
+docsearch = DeepLake.from_documents(texts, embeddings)
 qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=docsearch)
 
 # Ask question
