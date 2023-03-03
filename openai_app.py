@@ -58,9 +58,9 @@ if st.button("Ask"):
         st.warning("Please enter a question.")
     else:
         st.write("Searching for answer...")
-        answer = qa.similarity_search(query)
+        answer = qa.run(query)
         if answer:
-            st.success(f"Answer: {answer[0].page_content}")
+            st.success(f"Answer: {answer}")
         else:
             st.error("Sorry, no answer was found.")
 
