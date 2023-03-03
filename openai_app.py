@@ -60,7 +60,7 @@ if st.button("Ask"):
         st.write("Searching for answer...")
         answer = qa.run(query)
         if answer:
-            st.success(f"Answer: {answer}")
+            st.success(f"Answer: {answer[0.page_content]}")
         else:
             st.error("Sorry, no answer was found.")
 
