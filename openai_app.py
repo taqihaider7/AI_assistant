@@ -5,10 +5,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain import OpenAI, VectorDBQA
 from langchain.document_loaders import DirectoryLoader
 
-
-# Set up OpenAI API key
-import os
-os.environ["OPENAI_API_KEY"] = "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"
+openai_key = st.secrets["openai_API_key"]
 
 # Set up Streamlit app
 st.set_page_config(
@@ -46,7 +43,7 @@ texts = text_splitter.split_documents(documents)
 
 # Set up question-answering model
 st.write("Setting up question-answering model...")
-embeddings = OpenAIEmbeddings(openai_api_key="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")
+embeddings = OpenAIEmbeddings(openai_api_key=openai_key)
 docsearch = DeepLake.from_documents(texts, embeddings)
 qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=docsearch)
 
