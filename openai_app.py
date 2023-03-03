@@ -45,7 +45,7 @@ texts = text_splitter.split_documents(documents)
 st.write("Setting up question-answering model...")
 embeddings = OpenAIEmbeddings(openai_api_key=openai_key)
 docsearch = DeepLake.from_documents(texts, embeddings)
-qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=docsearch)
+qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=openai_key), chain_type="stuff", vectorstore=docsearch)
 
 # Ask question
 st.write("Enter your question below and click 'Ask' to get an answer:")
