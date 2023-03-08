@@ -6,7 +6,7 @@ from langchain import OpenAI, VectorDBQA
 from langchain.document_loaders import DirectoryLoader
 from PIL import Image
 
-
+api_key = st.secrets["API_key"]
 
 # Set up Streamlit app
 image= Image.open("app_banner.png")
@@ -46,7 +46,7 @@ texts = text_splitter.split_documents(documents)
 
 # Set up question-answering model
 st.write("Setting up question-answering model...")
-embeddings = OpenAIEmbeddings(openai_api_key="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")
+embeddings = OpenAIEmbeddings(openai_api_key=api_key)
 docsearch = Chroma.from_documents(texts, embeddings)
 qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=docsearch)
 
