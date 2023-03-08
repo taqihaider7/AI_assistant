@@ -6,7 +6,7 @@ from langchain import OpenAI, VectorDBQA
 from langchain.document_loaders import DirectoryLoader
 from PIL import Image
 
-api_key = st.secrets["Openai_API_key"]
+api_key = st.secrets["OPENAI_API_KEY"]
 
 # Set up Streamlit app
 image= Image.open("app_banner.png")
