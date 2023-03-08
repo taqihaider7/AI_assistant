@@ -52,7 +52,8 @@ qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=api_key), chain_type="
 
 # Ask question
 st.write("Enter your question below and click 'Ask' to get an answer:")
-query = st.text_input("Question: ")
+# query = st.text_input("Question: ")
+query= "what is the baggage policy for Pakistan"
 if st.button("Ask"):
     if not query:
         st.warning("Please enter a question.")
