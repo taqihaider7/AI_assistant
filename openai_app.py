@@ -48,11 +48,11 @@ texts = text_splitter.split_documents(documents)
 st.write("Setting up question-answering model...")
 embeddings = OpenAIEmbeddings(openai_api_key=api_key)
 docsearch = Chroma.from_documents(texts, embeddings)
-qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=docsearch)
+qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=api_key), chain_type="stuff", vectorstore=docsearch)
 
 # Ask question
 st.write("Enter your question below and click 'Ask' to get an answer:")
-query = st.text_input("Question: what is baggage policy for Pakistan")
+query = st.text_input("Question: ")
 if st.button("Ask"):
     if not query:
         st.warning("Please enter a question.")
