@@ -12,7 +12,7 @@ API = st.secrets["API"]
 image= Image.open("app_banner.png")
 st.image(image, use_column_width=True)
 
-st.set_page_config(page_icon="✈️",layout="wide", page_bg_color="#F5F5F5")
+st.set_page_config(page_icon="✈️",layout="wide")
 
 # Define app header and footer
 # st.markdown(
