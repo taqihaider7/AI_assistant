@@ -6,7 +6,7 @@ from langchain import OpenAI, VectorDBQA
 from langchain.document_loaders import DirectoryLoader
 from PIL import Image
 
-api_key = st.secrets["OPENAI_API_KEY"]
+API = st.secrets["API"]
 
 # Set up Streamlit app
 image= Image.open("app_banner.png")
@@ -46,14 +46,13 @@ texts = text_splitter.split_documents(documents)
 
 # Set up question-answering model
 st.write("Setting up question-answering model...")
-embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+embeddings = OpenAIEmbeddings(openai_api_key=API)
 docsearch = Chroma.from_documents(texts, embeddings)
-qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=api_key), chain_type="stuff", vectorstore=docsearch)
+qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", vectorstore=docsearch)
 
 # Ask question
 st.write("Enter your question below and click 'Ask' to get an answer:")
-# query = st.text_input("Question: ")
-query= "what is the baggage policy for Pakistan"
+query = st.text_input("Question: ")
 if st.button("Ask"):
     if not query:
         st.warning("Please enter a question.")
