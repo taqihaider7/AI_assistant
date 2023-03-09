@@ -29,7 +29,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-st.markdown(" **:red[Note :]** :blue[This app is a prototype and Model is trained on limited Data of Emirates Airline] :green[...Thanks for attention. !] ")
+st.markdown(" **:red[Note :]** :blue[This app is a prototype and Model is trained on limited Data of Emirates Airline]     :green[...Thanks for attention. !] ")
 # Load and process documents
 st.write("Loading and processing documents...")
 loader = DirectoryLoader("data", glob="**/*.txt")
