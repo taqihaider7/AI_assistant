@@ -3,3 +3,4 @@ chromadb
 openai
 unstructured
 pillow
+tiktoken
