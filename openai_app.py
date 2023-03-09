@@ -12,12 +12,7 @@ API = st.secrets["API"]
 image= Image.open("app_banner.png")
 st.image(image, use_column_width=True)
 
-# st.set_page_config(
-#     page_title="Flight Policy Companion",
-#     page_icon="✈️",
-#     layout="wide",
-#  #   page_bg_color="#F5F5F5",
-#     )
+st.set_page_config(page_icon="✈️",layout="wide", page_bg_color="#F5F5F5")
 
 # Define app header and footer
 # st.markdown(
@@ -31,7 +26,7 @@ st.image(image, use_column_width=True)
 st.markdown(
     """
     <footer style='text-align: center; padding-top: 30px;'>
-        Created by ❤️ Menlo Park Boys
+        Created with ❤️ by Team Menlo Park Boys
     </footer>
     """,
     unsafe_allow_html=True,
@@ -49,6 +44,8 @@ st.write("Setting up question-answering model...")
 embeddings = OpenAIEmbeddings(openai_api_key=API)
 docsearch = Chroma.from_documents(texts, embeddings)
 qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", vectorstore=docsearch)
+
+st.markdown(" **:red[Note :]** :blue[This app is a prototype and Model is trained on limited Data of Emirates Airline] :green[...Thanks for attention.!] ")
 
 # Ask question
 st.write("Enter your question below and click 'Ask' to get an answer:")
@@ -90,7 +87,7 @@ text-align: center;
 }
 </style>
 <div class="footer">
-<p>Made by ❤️: Menlo Park Boys</p>
+<p>Made with ❤️: by Menlo Park Boys</p>
 <p>View the code on <a href="https://github.com/yourusername/your-repo-name">GitHub</a></p>
 </div>
 """
