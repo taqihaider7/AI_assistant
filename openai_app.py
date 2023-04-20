@@ -46,18 +46,19 @@ qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_
 
 
 # Ask question
-st.write("Enter your question below and click 'Ask' to get an answer:")
-query = st.text_input("Question: ")
-if st.button("Ask"):
-    if not query:
-        st.warning("Please enter a question.")
-    else:
-        st.write("Searching for answer...")
-        answer = qa.run(query)
-        if answer:
-            st.success(f"Answer: {answer}")
-        else:
-            st.error("Sorry, no answer was found.")
+st.write("App has been paused due to OpenAI API issue, and will be resumed once issue is resolved")
+# st.write("Enter your question below and click 'Ask' to get an answer:")
+# query = st.text_input("Question: ")
+# if st.button("Ask"):
+#     if not query:
+#         st.warning("Please enter a question.")
+#     else:
+#         st.write("Searching for answer...")
+#         answer = qa.run(query)
+#         if answer:
+#             st.success(f"Answer: {answer}")
+#         else:
+#             st.error("Sorry, no answer was found.")
 
 # Set page footer
 footer = """
