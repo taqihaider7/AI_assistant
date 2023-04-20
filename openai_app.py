@@ -30,18 +30,18 @@ st.image(image, use_column_width=True)
 #     unsafe_allow_html=True,
 # )
 st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is trained on limited Data of Emirates Airline]     :green[...Thanks for attention. !] ")
-# Load and process documents
-st.write("Loading and processing documents...")
-loader = DirectoryLoader("data", glob="**/*.txt")
-documents = loader.load()
-text_splitter = CharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
-texts = text_splitter.split_documents(documents)
+# # Load and process documents
+# st.write("Loading and processing documents...")
+# loader = DirectoryLoader("data", glob="**/*.txt")
+# documents = loader.load()
+# text_splitter = CharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
+# texts = text_splitter.split_documents(documents)
 
-# Set up question-answering model
-st.write("Setting up question-answering model...")
-embeddings = OpenAIEmbeddings(openai_api_key=API)
-docsearch = Chroma.from_documents(texts, embeddings)
-qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", vectorstore=docsearch)
+# # Set up question-answering model
+# st.write("Setting up question-answering model...")
+# embeddings = OpenAIEmbeddings(openai_api_key=API)
+# docsearch = Chroma.from_documents(texts, embeddings)
+# qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", vectorstore=docsearch)
 
 
 
