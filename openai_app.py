@@ -46,7 +46,7 @@ st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is traine
 
 
 # Ask question
-st.write("App has been paused due to OpenAI API issue, and will be resumed once issue is resolved")
+st.markdown("# This App has been paused due to OpenAI API issue, and will be resumed once issue is resolved")
 # st.write("Enter your question below and click 'Ask' to get an answer:")
 # query = st.text_input("Question: ")
 # if st.button("Ask"):
@@ -87,7 +87,6 @@ text-align: center;
 </style>
 <div class="footer">
 <p>Made with ❤️: by Menlo Park Boys</p>
-<p>View the code on <a href="https://github.com/yourusername/your-repo-name">GitHub</a></p>
 </div>
 """
 st.markdown(footer,unsafe_allow_html=True)
