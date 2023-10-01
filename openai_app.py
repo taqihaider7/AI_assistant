@@ -2,19 +2,20 @@ import streamlit as st
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
-from langchain import OpenAI, VectorDBQA
+from langchain import OpenAI
+from langchain.chains import RetrievalQA
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from PIL import Image
 
-API = st.secrets["API"]
-
+# API = st.secrets["API"]
+API= "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"
 # Set up Streamlit app
 image= Image.open("app_banner.png")
 st.image(image, use_column_width=True)
 st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is trained on limited Data of Emirates Airline]     :green[...Thanks for attention. !] ")
 # Load and process documents
 st.write("Loading and processing documents...")
-loader = DirectoryLoader("data", glob="**/*.txt",loader_cls=TextLoader, use_multithreading=True)
+loader = DirectoryLoader("data", glob="**/*.txt",loader_cls=TextLoader, use_multithreading=True, show_progress=True)
 documents = loader.load()
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
 texts = text_splitter.split_documents(documents)
@@ -23,7 +24,8 @@ texts = text_splitter.split_documents(documents)
 st.write("Setting up question-answering model...")
 embeddings = OpenAIEmbeddings(openai_api_key=API)
 docsearch = Chroma.from_documents(texts, embeddings)
-qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", vectorstore=docsearch)
+qa = RetrievalQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", retriever=docsearch.as_retriever())
+
 
 # Query the Data 
 # st.markdown("# This App has been paused due to OpenAI API issue, and will be resumed once issue is resolved")
