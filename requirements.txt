@@ -4,4 +4,4 @@ openai
 unstructured
 pillow
 tiktoken
-sqlite3 == 3.43.1
+sqlite3 == 3.36.0
