@@ -16,7 +16,7 @@ st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is traine
 st.write("Loading and processing documents...")
 loader = DirectoryLoader("data", glob="**/*.txt",loader_cls=TextLoader, use_multithreading=True)
 documents = loader.load()
-text_splitter = CharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
 texts = text_splitter.split_documents(documents)
 
 # Set up question-answering model
