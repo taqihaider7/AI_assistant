@@ -45,7 +45,7 @@ st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is traine
 
 
 
-# Ask question
+# Query the Data 
 st.markdown("# This App has been paused due to OpenAI API issue, and will be resumed once issue is resolved")
 # st.write("Enter your question below and click 'Ask' to get an answer:")
 # query = st.text_input("Question: ")
