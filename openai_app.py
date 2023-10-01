@@ -11,54 +11,34 @@ API = st.secrets["API"]
 # Set up Streamlit app
 image= Image.open("app_banner.png")
 st.image(image, use_column_width=True)
-
-# Define app header and footer
-# st.markdown(
-#     """
-#     <div style='padding: 10px; background-color: #EBF5FB;'>
-#         <h1 style='text-align: center; color: #283593;'>ChattyPanda</h1>
-#     </div>
-#     """,
-#     unsafe_allow_html=True)
-
-# st.markdown(
-#     """
-#     <footer style='text-align: center; padding-top: 30px;'>
-#         Created with ❤️ by Team Menlo Park Boys
-#     </footer>
-#     """,
-#     unsafe_allow_html=True,
-# )
 st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is trained on limited Data of Emirates Airline]     :green[...Thanks for attention. !] ")
-# # Load and process documents
-# st.write("Loading and processing documents...")
-# loader = DirectoryLoader("data", glob="**/*.txt")
-# documents = loader.load()
-# text_splitter = CharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
-# texts = text_splitter.split_documents(documents)
+# Load and process documents
+st.write("Loading and processing documents...")
+loader = DirectoryLoader("data", glob="**/*.txt")
+documents = loader.load()
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+texts = text_splitter.split_documents(documents)
 
-# # Set up question-answering model
-# st.write("Setting up question-answering model...")
-# embeddings = OpenAIEmbeddings(openai_api_key=API)
-# docsearch = Chroma.from_documents(texts, embeddings)
-# qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", vectorstore=docsearch)
-
-
+# Set up question-answering model
+st.write("Setting up question-answering model...")
+embeddings = OpenAIEmbeddings(openai_api_key=API)
+docsearch = Chroma.from_documents(texts, embeddings)
+qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API, ), chain_type="map_reduce", vectorstore=docsearch)
 
 # Query the Data 
-st.markdown("# This App has been paused due to OpenAI API issue, and will be resumed once issue is resolved")
-# st.write("Enter your question below and click 'Ask' to get an answer:")
-# query = st.text_input("Question: ")
-# if st.button("Ask"):
-#     if not query:
-#         st.warning("Please enter a question.")
-#     else:
-#         st.write("Searching for answer...")
-#         answer = qa.run(query)
-#         if answer:
-#             st.success(f"Answer: {answer}")
-#         else:
-#             st.error("Sorry, no answer was found.")
+# st.markdown("# This App has been paused due to OpenAI API issue, and will be resumed once issue is resolved")
+st.write("Enter your question below and click 'Ask' to get an answer:")
+query = st.text_input("Question: ")
+if st.button("Ask"):
+    if not query:
+        st.warning("Please Enter the Question.")
+    else:
+        st.write("Searching for Answer...")
+        answer = qa.run(query)
+        if answer:
+            st.success(f"Answer: {answer}")
+        else:
+            st.error("Sorry, No Answer Was Found.")
 
 # Set page footer
 footer = """
