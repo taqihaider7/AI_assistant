@@ -14,7 +14,7 @@ st.image(image, use_column_width=True)
 st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is trained on limited Data of Emirates Airline]     :green[...Thanks for attention. !] ")
 # Load and process documents
 st.write("Loading and processing documents...")
-loader = DirectoryLoader("data", glob="**/*.txt", use_multithreading=True, show_progress=True)
+loader = DirectoryLoader("data", glob="**/*.txt", show_progress=True)
 documents = loader.load()
 text_splitter = CharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
 texts = text_splitter.split_documents(documents)
