@@ -16,14 +16,14 @@ st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is traine
 st.write("Loading and processing documents...")
 loader = DirectoryLoader("data", glob="**/*.txt")
 documents = loader.load()
-text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
+text_splitter = CharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
 texts = text_splitter.split_documents(documents)
 
 # Set up question-answering model
 st.write("Setting up question-answering model...")
 embeddings = OpenAIEmbeddings(openai_api_key=API)
 docsearch = Chroma.from_documents(texts, embeddings)
-qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API, ), chain_type="map_reduce", vectorstore=docsearch)
+qa = VectorDBQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", vectorstore=docsearch)
 
 # Query the Data 
 # st.markdown("# This App has been paused due to OpenAI API issue, and will be resumed once issue is resolved")
