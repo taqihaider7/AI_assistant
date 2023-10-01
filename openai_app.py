@@ -7,6 +7,7 @@ from langchain.chains import RetrievalQA
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from PIL import Image
 
+
 # API = st.secrets["API"]
 API= "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"
 # Set up Streamlit app
