@@ -8,8 +8,8 @@ from langchain.document_loaders import DirectoryLoader, TextLoader
 from PIL import Image
 
 
-# API = st.secrets["API"]
-API= "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"
+API = st.secrets["API"]
+
 # Set up Streamlit app
 image= Image.open("app_banner.png")
 st.image(image, use_column_width=True)
