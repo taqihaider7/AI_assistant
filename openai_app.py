@@ -6,26 +6,41 @@ from langchain import OpenAI
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from PIL import Image
+from langchain.vectorstores import Pinecone
+import pinecone
+from tqdm import tqdm
+from langchain.embeddings import CohereEmbeddings
+import cohere
 
 
-API = st.secrets["API"]
+openai_API = st.secrets["API"]
+pinecone_API = st.secrets["PINECONE_API"]
+cohere_API = st.secrets["COHERE_API"]
 
 # Set up Streamlit app
 image= Image.open("app_banner.png")
 st.image(image, use_column_width=True)
 st.markdown(" **:red[Note :]** :blue[This App is a Prototype and Model is trained on limited Data of Emirates Airline]     :green[...Thanks for attention. !] ")
 # Load and process documents
-st.write("Loading and processing documents...")
-loader = DirectoryLoader("data", glob="**/*.txt",loader_cls=TextLoader, use_multithreading=True, show_progress=True)
-documents = loader.load()
-text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-texts = text_splitter.split_documents(documents)
+# st.write("Loading and processing documents...")
+# loader = DirectoryLoader("data", glob="**/*.txt",loader_cls=TextLoader, use_multithreading=True, show_progress=True)
+# documents = loader.load()
+# text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+# texts = text_splitter.split_documents(documents)
+
+
+# initailizing the Pincone vector Database
+
+pinecone.init(
+      api_key=pinecone_API, environment="asia-southeast1-gcp")
+
+embeddings= CohereEmbeddings(model = "embed-multilingual-v2.0", cohere_api_key=cohere_API)
 
 # Set up question-answering model
 st.write("Setting up question-answering model...")
-embeddings = OpenAIEmbeddings(openai_api_key=API)
-docsearch = Chroma.from_documents(texts, embeddings)
-qa = RetrievalQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", retriever=docsearch.as_retriever())
+# docsearch = Chroma.from_documents(texts, embeddings)
+docsearch = Pinecone.from_existing_index(index_name="chatty-panda-embeddings", embedding = embeddings)
+qa = RetrievalQA.from_chain_type(llm=OpenAI(openai_api_key=openai_API), chain_type="map_reduce", retriever=docsearch.as_retriever())
 
 
 # Query the Data 
