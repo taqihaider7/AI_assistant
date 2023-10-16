@@ -3,4 +3,3 @@ openai
 unstructured
 pillow
 tiktoken
-sqlite3
