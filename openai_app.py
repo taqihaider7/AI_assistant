@@ -13,7 +13,7 @@ from langchain.embeddings import CohereEmbeddings
 import cohere
 
 
-openai_API = st.secrets["API"]
+API = st.secrets["API"]
 pinecone_API = st.secrets["PINECONE_API"]
 cohere_API = st.secrets["COHERE_API"]
 
@@ -40,7 +40,7 @@ embeddings= CohereEmbeddings(model = "embed-multilingual-v2.0", cohere_api_key=c
 st.write("Setting up question-answering model...")
 # docsearch = Chroma.from_documents(texts, embeddings)
 docsearch = Pinecone.from_existing_index(index_name="chatty-panda-embeddings", embedding = embeddings)
-qa = RetrievalQA.from_chain_type(llm=OpenAI(openai_api_key=openai_API), chain_type="map_reduce", retriever=docsearch.as_retriever())
+qa = RetrievalQA.from_chain_type(llm=OpenAI(openai_api_key=API), chain_type="map_reduce", retriever=docsearch.as_retriever())
 
 
 # Query the Data 
