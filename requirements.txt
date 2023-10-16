@@ -4,3 +4,4 @@ unstructured
 pillow
 tiktoken
 pinecone-client
+cohere
